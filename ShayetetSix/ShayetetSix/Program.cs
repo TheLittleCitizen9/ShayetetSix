@@ -9,6 +9,8 @@ namespace ShayetetSix
             ShayetetMenu shayetetMenu = new ShayetetMenu();
             shayetetMenu.AddAction("1", "Add missle", null);
             shayetetMenu.Main();
+
+
         }
     }
 }

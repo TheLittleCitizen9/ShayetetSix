@@ -17,12 +17,14 @@ namespace ShayetetSix
 
         private Dictionary<string, string> _displayOptions;
         private MisslesLauncher _misslesLauncher = new MisslesLauncher();
+        private MapppingDecision _mapppingDecision;
 
 
         public ShayetetMenu()
         {
             _options = new Dictionary<string, IActions<IRocket>>();
             _displayOptions = new Dictionary<string, string>();
+            _mapppingDecision = new MapppingDecision();
         }
 
         public override void AddAction(string option, string description, IActions<IRocket> action, bool requiersInput = false)
@@ -47,9 +49,26 @@ namespace ShayetetSix
                 input = Console.ReadLine();
                 if(validator.Validate(input))
                 {
-                    // need to check what function the user wants to do
-                    consoleDisplayer.PrintValueToConsole(ENTER_ROCKET_NAME);
-                    string userInput = Console.ReadLine();
+                    input = _mapppingDecision.MapInput(input, consoleDisplayer);
+                    if(_requaiersInput.Contains(input))
+                    {
+                        string userInput = Console.ReadLine();
+                        string[] variables = userInput.Split(' ');
+                        IRocket rocket = _mapppingDecision.MapRequiresMissleFunctions(input, variables);
+                        if(rocket != null)
+                        {
+                            _options[input].Action(rocket);
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                    else
+                    {
+                        _options[input].Action();
+                    }
+                    
                 }
             }
         }

@@ -6,7 +6,9 @@ namespace ShayetetSix
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ShayetetMenu shayetetMenu = new ShayetetMenu();
+            shayetetMenu.AddAction("1", "Add missle", null);
+            shayetetMenu.Main();
         }
     }
 }

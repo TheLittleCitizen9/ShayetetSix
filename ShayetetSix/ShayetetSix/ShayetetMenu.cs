@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using MenuBuilder;
 
@@ -34,7 +35,15 @@ namespace ShayetetSix
 
         public override void Main()
         {
-            throw new NotImplementedException();
+            ConsoleDisplayer consoleDisplayer = new ConsoleDisplayer(_displayOptions);
+            Validator validator = new Validator(_options.Keys.ToList());
+            string input = string.Empty;
+
+            while (true)
+            {
+                consoleDisplayer.ShowOptions();
+                input = Console.ReadLine();
+            }
         }
 
         public override void RunOption(string option, params IRocket[] variables)

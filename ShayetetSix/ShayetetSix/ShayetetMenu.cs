@@ -10,11 +10,13 @@ namespace ShayetetSix
     {
         private const string ENTER_VARIABLES = "Enter variables - format X Y";
         private const string ERROR_MSG = "Invalid input";
+        private const string ENTER_ROCKET_NAME = "Enter rocket name";
         private readonly List<string> _requaiersInput = new List<string>();
 
         private Dictionary<string, IActions<IRocket>> _options;
 
         private Dictionary<string, string> _displayOptions;
+        private MisslesLauncher _misslesLauncher = new MisslesLauncher();
 
 
         public ShayetetMenu()
@@ -43,6 +45,12 @@ namespace ShayetetSix
             {
                 consoleDisplayer.ShowOptions();
                 input = Console.ReadLine();
+                if(validator.Validate(input))
+                {
+                    // need to check what function the user wants to do
+                    consoleDisplayer.PrintValueToConsole(ENTER_ROCKET_NAME);
+                    string userInput = Console.ReadLine();
+                }
             }
         }
 

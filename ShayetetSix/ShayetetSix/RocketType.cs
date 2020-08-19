@@ -10,7 +10,4 @@ namespace ShayetetSix
         Ballistic,
         Cruise
     }
-    class RocketTypeEnum
-    {
-    }
 }

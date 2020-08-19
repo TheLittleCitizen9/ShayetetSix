@@ -4,15 +4,15 @@ using System.Text;
 
 namespace ShayetetSix
 {
-    public class Cruise : IRocket
+    public class Rocket : IRocket
     {
-        private int _successRate;
-        private RocketType _type;
+        public int SuccessRate;
+        public RocketType Type;
 
-        public Cruise()
+        public Rocket(int successRate, RocketType rocketType)
         {
-            _successRate = 20;
-            _type = RocketType.Cruise;
+            SuccessRate = successRate;
+            Type = rocketType;
         }
 
         public bool IsLaunchSuccessful()
@@ -21,7 +21,7 @@ namespace ShayetetSix
             for (int i = 0; i < 100; i++)
             {
                 int randomValueBetween0And99 = rnd.Next(100);
-                if (randomValueBetween0And99 < _successRate)
+                if (randomValueBetween0And99 < SuccessRate)
                 {
                     return true;
                 }

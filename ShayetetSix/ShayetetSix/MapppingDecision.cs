@@ -38,31 +38,44 @@ namespace ShayetetSix
         //    }
         //}
 
-        public IActions<IRocket> MapInput(string input, ConsoleDisplayer consoleDisplayer, MisslesLauncher misslesLauncher, params string[] variables)
+        public IActions<Rocket> MapInput(string input, ConsoleDisplayer consoleDisplayer, ref MisslesLauncher misslesLauncher, ref string[] variables)
         {
+            string userInput;
             switch (input)
             {
                 case "1":
                     consoleDisplayer.PrintValueToConsole("Enter missle name to add");
-                    return new AddRocketAction(misslesLauncher);
+                    userInput = Console.ReadLine();
+                    variables = userInput.Split(' ');
+                    var AddAction = new AddRocketAction(misslesLauncher);
+                    misslesLauncher = AddAction.MisslesLauncher;
+                    return AddAction;
                 case "2":
                     consoleDisplayer.PrintValueToConsole("Enter missle name and number of missles to launch. Use space between the two inputs");
-                    return new LaunchRocketAction(misslesLauncher);
+                    userInput = Console.ReadLine();
+                    variables = userInput.Split(' ');
+                    var launchAction = new LaunchRocketAction(misslesLauncher, int.Parse(variables[1]), variables[0]);
+                    misslesLauncher = launchAction.MisslesLauncher;
+                    return launchAction;
                 case "3":
                     consoleDisplayer.PrintValueToConsole("Printing inventory");
-                    return "3";
+                    return new InventoryReportAction(misslesLauncher);
                 case "4":
                     consoleDisplayer.PrintValueToConsole("Enter index to delete from");
-                    return new CleanInventoryAction(misslesLauncher, int.Parse(variables[1]));
+                    userInput = Console.ReadLine();
+                    variables = userInput.Split(' ');
+                    var removeAction = new CleanInventoryAction(misslesLauncher, variables[0]);
+                    misslesLauncher = removeAction.MisslesLauncher;
+                    return removeAction;
                 case "5":
                     consoleDisplayer.PrintValueToConsole("GG warior");
-                    return "5";
+                    return new ExitAction();
                 default:
-                    return "-1";
+                    return null;
             }
         }
 
-        public IRocket MapRequiresMissleFunctions(string input, params string[] variables)
+        public Rocket MapRequiresMissleFunctions(string input, params string[] variables)
         {
             switch (input)
             {
@@ -77,16 +90,16 @@ namespace ShayetetSix
             }
         }
 
-        public IRocket MapTypeToRocket(RocketType rocketType)
+        public Rocket MapTypeToRocket(RocketType rocketType)
         {
             switch (rocketType)
             {
                 case RocketType.Torpedo:
-                    return new Torpedo();
+                    return new Rocket(100, rocketType);
                 case RocketType.Ballistic:
-                    return new Ballistic();
+                    return new Rocket(50, rocketType);
                 case RocketType.Cruise:
-                    return new Cruise();
+                    return new Rocket(20, rocketType);
                 default:
                     return null;
             }

@@ -4,11 +4,8 @@ using System.Text;
 
 namespace ShayetetSix
 {
-    public enum RocketType
+    public interface ILaunchTechnique
     {
-        Torpedo,
-        Ballistic,
-        Cruise,
-        Advanced
+        bool IsLaunchSuccessful();
     }
 }

@@ -82,9 +82,6 @@ namespace ShayetetSix
                 case "1":
                     var rocketType = (RocketType)Enum.Parse(typeof(RocketType), variables[0], true);
                     return MapTypeToRocket(rocketType);
-                case "2":
-                    rocketType = (RocketType)Enum.Parse(typeof(RocketType), variables[0], true);
-                    return MapTypeToRocket(rocketType);
                 default:
                     return null;
             }
@@ -100,6 +97,10 @@ namespace ShayetetSix
                     return new Rocket(50, rocketType);
                 case RocketType.Cruise:
                     return new Rocket(20, rocketType);
+                case RocketType.Advanced:
+                    Console.WriteLine("Enter range to launch - from 0 to 1500");
+                    var range = double.Parse(Console.ReadLine());
+                    return new AdvancedRocket(range, RocketType.Advanced);
                 default:
                     return null;
             }

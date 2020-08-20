@@ -4,18 +4,18 @@ using System.Text;
 
 namespace ShayetetSix
 {
-    public class Rocket : IRocket
+    public class Rocket : IRocket, ILaunchTechnique
     {
-        public int SuccessRate;
+        public double SuccessRate;
         public RocketType Type;
 
-        public Rocket(int successRate, RocketType rocketType)
+        public Rocket(double successRate, RocketType rocketType)
         {
             SuccessRate = successRate;
             Type = rocketType;
         }
 
-        public bool IsLaunchSuccessful()
+        public virtual bool IsLaunchSuccessful()
         {
             Random rnd = new Random();
             for (int i = 0; i < 100; i++)

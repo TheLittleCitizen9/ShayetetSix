@@ -15,6 +15,7 @@ namespace ShayetetSix
             {
                 case "1":
                     consoleDisplayer.PrintValueToConsole("Enter missle name to add");
+                    PrintMissleTypes();
                     userInput = Console.ReadLine();
                     variables = userInput.Split(' ');
                     var addAction = new AddRocketAction(misslesLauncher);
@@ -87,6 +88,15 @@ namespace ShayetetSix
                 misslesLauncher = launchAction.MisslesLauncher;
                 return launchAction;
             }
+        }
+
+        private void PrintMissleTypes()
+        {
+            foreach (var item in Enum.GetNames(typeof(RocketType)))
+            {
+                Console.Write($"{item} ");
+            }
+            Console.WriteLine();
         }
     }
 }

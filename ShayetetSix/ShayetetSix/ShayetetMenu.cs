@@ -62,12 +62,12 @@ namespace ShayetetSix
                         if(validator.ValidateMissleInput(variables[0]) || validator.ValidateWar(variables[0]))
                         {
                             Rocket rocket = _mapppingDecision.GetRocketObject(input, variables);
-                            _options[input].Action(rocket);
+                            RunOption(input, rocket);
                             Console.WriteLine("----------------------------------");
                         }
                         else if(validator.ValidateInt(variables[0]))
                         {
-                            _options[input].Action();
+                            RunOption(input);
                             Console.WriteLine("----------------------------------");
                         }
                         else
@@ -79,7 +79,7 @@ namespace ShayetetSix
                     {
                         IActions<Rocket> action = _mapppingDecision.MapInput(input, consoleDisplayer, ref _misslesLauncher, ref variables);
                         AddAction(input, _displayOptions[input], action);
-                        _options[input].Action();
+                        RunOption(input);
                         Console.WriteLine("----------------------------------");
                     }
 

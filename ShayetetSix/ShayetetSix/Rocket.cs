@@ -17,17 +17,14 @@ namespace ShayetetSix
             LaunchFailedStatus = false;
         }
 
-        public virtual bool IsLaunchSuccessful()
+        public virtual void IsLaunchSuccessful()
         {
             Random rnd = new Random();
             int randomValueBetween0And99 = rnd.Next(100);
-            if (randomValueBetween0And99 < SuccessRate)
+            if (randomValueBetween0And99 > SuccessRate)
             {
-                return true;
+                LaunchFailedStatus = true;
             }
-
-            LaunchFailedStatus = true;
-            return false;
         }
     }
 }

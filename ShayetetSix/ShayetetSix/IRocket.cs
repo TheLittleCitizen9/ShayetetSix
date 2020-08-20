@@ -6,6 +6,6 @@ namespace ShayetetSix
 {
     public interface IRocket
     {
-        bool IsLaunchSuccessful();
+        void IsLaunchSuccessful();
     }
 }

@@ -12,22 +12,17 @@ namespace ShayetetSix
 
         }
 
-        public override bool IsLaunchSuccessful()
+        public override void IsLaunchSuccessful()
         {
             double percentageOfSuccess = FULL_RANGE - SuccessRate;
             if(percentageOfSuccess == 1500)
             {
                 LaunchFailedStatus = true;
-                return true;
-            }
-            else if(percentageOfSuccess == 0)
-            {
-                return false;
             }
             else
             {
                 SuccessRate = percentageOfSuccess;
-                return base.IsLaunchSuccessful();
+                base.IsLaunchSuccessful();
             }
         }
     }

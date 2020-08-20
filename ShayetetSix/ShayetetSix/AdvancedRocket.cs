@@ -17,6 +17,7 @@ namespace ShayetetSix
             double percentageOfSuccess = FULL_RANGE - SuccessRate;
             if(percentageOfSuccess == 1500)
             {
+                LaunchFailedStatus = true;
                 return true;
             }
             else if(percentageOfSuccess == 0)

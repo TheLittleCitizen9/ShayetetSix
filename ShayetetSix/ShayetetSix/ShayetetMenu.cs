@@ -8,9 +8,7 @@ namespace ShayetetSix
 {
     public class ShayetetMenu : BasicMenu<Rocket>
     {
-        private const string ENTER_VARIABLES = "Enter variables - format X Y";
         private const string ERROR_MSG = "Invalid input";
-        private const string ENTER_ROCKET_NAME = "Enter rocket name";
         private readonly List<string> _requaiersInput = new List<string>();
 
         private Dictionary<string, IActions<Rocket>> _options;

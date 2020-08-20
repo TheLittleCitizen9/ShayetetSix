@@ -17,7 +17,6 @@ namespace ShayetetSix.Actions
             if (parameters.Length == 1)
             {
                 MisslesLauncher.MissleLauncher.Add(parameters[0]);
-                MisslesLauncher.MisslesFailedLaunchStatus[MisslesLauncher.MissleLauncher.Count - 1] = false;
                 Console.WriteLine("Rocket added to missile launcher");
             }
         }

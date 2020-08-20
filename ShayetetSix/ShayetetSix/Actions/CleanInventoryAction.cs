@@ -16,22 +16,19 @@ namespace ShayetetSix.Actions
         }
         public void Action(params Rocket[] parameters)
         {
-            int numOfMissles;
-            if(int.TryParse(_indexOfMissleToDelete, out numOfMissles))
+            int indexOfMissle;
+            if(int.TryParse(_indexOfMissleToDelete, out indexOfMissle))
             {
-                if(numOfMissles < MisslesLauncher.MissleLauncher.Count)
+                if(indexOfMissle < MisslesLauncher.MissleLauncher.Count)
                 {
-                    int index = MisslesLauncher.MissleLauncher.IndexOf(MisslesLauncher.MissleLauncher[numOfMissles]);
-                    MisslesLauncher.MissleLauncher.RemoveAt(numOfMissles);
-                    MisslesLauncher.MisslesFailedLaunchStatus.Remove(index);
-                    Console.WriteLine("Missle deleted (:");
-                    Console.WriteLine("----------------------------------");
+                    int index = MisslesLauncher.MissleLauncher.IndexOf(MisslesLauncher.MissleLauncher[indexOfMissle]);
+                    MisslesLauncher.MissleLauncher.RemoveAt(indexOfMissle);
+                    Console.WriteLine("When the power of love overcomes the love of power the world will know peace");
                 }
                 else
                 {
                     Console.WriteLine("Index is out of range");
                 }
-                
             }
         }
     }

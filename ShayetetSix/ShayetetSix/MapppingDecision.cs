@@ -17,25 +17,14 @@ namespace ShayetetSix
                     consoleDisplayer.PrintValueToConsole("Enter missle name to add");
                     userInput = Console.ReadLine();
                     variables = userInput.Split(' ');
-                    var AddAction = new AddRocketAction(misslesLauncher);
-                    misslesLauncher = AddAction.MisslesLauncher;
-                    return AddAction;
+                    var addAction = new AddRocketAction(misslesLauncher);
+                    misslesLauncher = addAction.MisslesLauncher;
+                    return addAction;
                 case "2":
-                    consoleDisplayer.PrintValueToConsole("Enter missle name and number of missles to launch. Use space between the two inputs");
+                    consoleDisplayer.PrintValueToConsole("Enter missle name and number of missles to launch. Use space between the two inputs. Enter 'TotalWar' to launch all missles");
                     userInput = Console.ReadLine();
                     variables = userInput.Split(' ');
-                    if(variables.Length == 2)
-                    {
-                        var launchAction = new LaunchRocketAction(misslesLauncher, int.Parse(variables[1]), variables[0]);
-                        misslesLauncher = launchAction.MisslesLauncher;
-                        return launchAction;
-                    }
-                    else
-                    {
-                        var launchAction = new LaunchRocketAction(misslesLauncher, 0, variables[0]);
-                        misslesLauncher = launchAction.MisslesLauncher;
-                        return launchAction;
-                    }
+                    return CheckLaunchOption(variables, ref misslesLauncher);
                 case "3":
                     consoleDisplayer.PrintValueToConsole("Printing inventory");
                     return new InventoryReportAction(misslesLauncher);
@@ -47,7 +36,6 @@ namespace ShayetetSix
                     misslesLauncher = removeAction.MisslesLauncher;
                     return removeAction;
                 case "5":
-                    consoleDisplayer.PrintValueToConsole("GG warior");
                     return new ExitAction();
                 default:
                     return null;
@@ -82,6 +70,22 @@ namespace ShayetetSix
                     return new AdvancedRocket(range, RocketType.Advanced);
                 default:
                     return null;
+            }
+        }
+
+        private IActions<Rocket> CheckLaunchOption(string[] variables, ref MisslesLauncher misslesLauncher)
+        {
+            if (variables.Length == 2)
+            {
+                var launchAction = new LaunchRocketAction(misslesLauncher, int.Parse(variables[1]), variables[0]);
+                misslesLauncher = launchAction.MisslesLauncher;
+                return launchAction;
+            }
+            else
+            {
+                var launchAction = new LaunchRocketAction(misslesLauncher, 0, variables[0]);
+                misslesLauncher = launchAction.MisslesLauncher;
+                return launchAction;
             }
         }
     }

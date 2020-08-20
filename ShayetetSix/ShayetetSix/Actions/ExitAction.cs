@@ -9,6 +9,7 @@ namespace ShayetetSix.Actions
     {
         public void Action(params Rocket[] parameters)
         {
+            Console.WriteLine("GG warior");
             Environment.Exit(0);
         }
     }

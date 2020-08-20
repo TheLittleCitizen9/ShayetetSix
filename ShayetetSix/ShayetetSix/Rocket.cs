@@ -4,15 +4,17 @@ using System.Text;
 
 namespace ShayetetSix
 {
-    public class Rocket : IRocket, ILaunchTechnique
+    public class Rocket : IRocket
     {
         public double SuccessRate;
         public RocketType Type;
+        public bool LaunchFailedStatus;
 
         public Rocket(double successRate, RocketType rocketType)
         {
             SuccessRate = successRate;
             Type = rocketType;
+            LaunchFailedStatus = false;
         }
 
         public virtual bool IsLaunchSuccessful()
@@ -23,6 +25,8 @@ namespace ShayetetSix
             {
                 return true;
             }
+
+            LaunchFailedStatus = true;
             return false;
         }
     }

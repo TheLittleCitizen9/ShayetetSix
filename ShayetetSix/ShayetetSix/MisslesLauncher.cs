@@ -6,12 +6,11 @@ namespace ShayetetSix
 {
     public class MisslesLauncher
     {
-        public Dictionary<int, bool> MisslesFailedLaunchStatus = new Dictionary<int, bool>();
-        public List<Rocket> MissleLauncher = new List<Rocket>();
+        public List<Rocket> MissleLauncher;
 
         public MisslesLauncher()
         {
-
+            MissleLauncher = new List<Rocket>();
         }
     }
 }

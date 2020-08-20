@@ -34,20 +34,14 @@ namespace ShayetetSix.Actions
 
         private void LaunchAllMissles()
         {
-            List<Rocket> duplicateList = MisslesLauncher.MissleLauncher.Select(m => m).ToList();
             int countOfLaunches = 0;
-            for (int i = 0; i < duplicateList.Count; i++)
+            for (int i = 0; i < _duplicateList.Count; i++)
             {
-                if(!MisslesLauncher.MisslesFailedLaunchStatus[i])
+                if(!MisslesLauncher.MissleLauncher[i].LaunchFailedStatus)
                 {
-                    bool isLaunchSuccessful = MisslesLauncher.MissleLauncher[i].IsLaunchSuccessful();
-                    if (!isLaunchSuccessful)
+                    MisslesLauncher.MissleLauncher[i].IsLaunchSuccessful();
+                    if (!MisslesLauncher.MissleLauncher[i].LaunchFailedStatus)
                     {
-                        MisslesLauncher.MisslesFailedLaunchStatus[i] = true;
-                    }
-                    else
-                    {
-                        
                         countOfLaunches++;
                     }
                 }
@@ -64,14 +58,10 @@ namespace ShayetetSix.Actions
             {
                 if (_duplicateList[i].Type == (RocketType)Enum.Parse(typeof(RocketType), _nameOfMissleToLaunch, true) && countOfLaunches < _numOfMisslesToLaunch)
                 {
-                    if(!MisslesLauncher.MisslesFailedLaunchStatus[i])
+                    if(!MisslesLauncher.MissleLauncher[i].LaunchFailedStatus)
                     {
-                        bool isLaunchSuccessful = _duplicateList[i].IsLaunchSuccessful();
-                        if (!isLaunchSuccessful)
-                        {
-                            MisslesLauncher.MisslesFailedLaunchStatus[i] = true;
-                        }
-                        else
+                        MisslesLauncher.MissleLauncher[i].IsLaunchSuccessful();
+                        if (!MisslesLauncher.MissleLauncher[i].LaunchFailedStatus)
                         {
                             DeleteRocket(1);
                             countOfLaunches++;
@@ -91,7 +81,6 @@ namespace ShayetetSix.Actions
                 if(MisslesLauncher.MissleLauncher[i].Type == (RocketType)Enum.Parse(typeof(RocketType), _nameOfMissleToLaunch, true) && countOfDelete < numOfRocketsToDelete)
                 {
                     MisslesLauncher.MissleLauncher.RemoveAt(i);
-                    MisslesLauncher.MisslesFailedLaunchStatus.Remove(i);
                     countOfDelete++;
                 }
             }
@@ -101,7 +90,7 @@ namespace ShayetetSix.Actions
         {
             for (int i = 0; i < _duplicateList.Count; i++)
             {
-                if(!MisslesLauncher.MisslesFailedLaunchStatus[i])
+                if(!_duplicateList[i].LaunchFailedStatus)
                 {
                     MisslesLauncher.MissleLauncher.RemoveAt(i);
                 }

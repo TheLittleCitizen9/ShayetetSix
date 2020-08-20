@@ -13,7 +13,6 @@ namespace ShayetetSix
             shayetetMenu.AddAction("4", "Remove missle", null, true);
             shayetetMenu.AddAction("5", "Exit", null);
             shayetetMenu.Main();
-
         }
     }
 }

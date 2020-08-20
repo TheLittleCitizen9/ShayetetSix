@@ -49,7 +49,7 @@ namespace ShayetetSix
         {
             ConsoleDisplayer consoleDisplayer = new ConsoleDisplayer(_displayOptions);
             Validator validator = new Validator(_options.Keys.ToList());
-            string input = string.Empty;
+            string input;
             string[] variables = null;
             while (true)
             {
@@ -61,14 +61,20 @@ namespace ShayetetSix
                     {
                         IActions<Rocket> action = _mapppingDecision.MapInput(input, consoleDisplayer, ref _misslesLauncher, ref variables);
                         AddAction(input, _displayOptions[input], action);
-                        Rocket rocket = _mapppingDecision.MapRequiresMissleFunctions(input, variables);
-                        if (rocket != null)
+                        if(validator.ValidateMissleInput(variables[0]) || validator.ValidateWar(variables[0]))
                         {
-                             _options[input].Action(rocket);
+                            Rocket rocket = _mapppingDecision.GetRocketObject(input, variables);
+                            _options[input].Action(rocket);
+                            Console.WriteLine("----------------------------------");
+                        }
+                        else if(validator.ValidateInt(variables[0]))
+                        {
+                            _options[input].Action();
+                            Console.WriteLine("----------------------------------");
                         }
                         else
                         {
-                            _options[input].Action();
+                            consoleDisplayer.PrintValueToConsole(ERROR_MSG);
                         }
                     }
                     else
@@ -76,6 +82,7 @@ namespace ShayetetSix
                         IActions<Rocket> action = _mapppingDecision.MapInput(input, consoleDisplayer, ref _misslesLauncher, ref variables);
                         AddAction(input, _displayOptions[input], action);
                         _options[input].Action();
+                        Console.WriteLine("----------------------------------");
                     }
 
                 }

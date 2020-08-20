@@ -22,5 +22,10 @@ namespace ShayetetSix
             RocketType rocketType;
             return Enum.TryParse(input, true, out rocketType);
         }
+
+        public bool ValidateWar(string input)
+        {
+            return input == "TotalWar";
+        }
     }
 }

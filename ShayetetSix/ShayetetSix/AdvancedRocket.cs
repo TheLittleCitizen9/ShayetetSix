@@ -14,8 +14,8 @@ namespace ShayetetSix
 
         public override bool IsLaunchSuccessful()
         {
-            double percentageOfSuccess = (FULL_RANGE - SuccessRate)/1500 * 100;
-            if(percentageOfSuccess == 100)
+            double percentageOfSuccess = FULL_RANGE - SuccessRate;
+            if(percentageOfSuccess == 1500)
             {
                 return true;
             }

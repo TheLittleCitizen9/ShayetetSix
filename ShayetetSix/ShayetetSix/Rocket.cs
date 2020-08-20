@@ -18,13 +18,10 @@ namespace ShayetetSix
         public virtual bool IsLaunchSuccessful()
         {
             Random rnd = new Random();
-            for (int i = 0; i < 100; i++)
+            int randomValueBetween0And99 = rnd.Next(100);
+            if (randomValueBetween0And99 < SuccessRate)
             {
-                int randomValueBetween0And99 = rnd.Next(100);
-                if (randomValueBetween0And99 < SuccessRate)
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         }

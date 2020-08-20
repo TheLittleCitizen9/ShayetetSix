@@ -8,36 +8,6 @@ namespace ShayetetSix
 {
     public class MapppingDecision
     {
-        //public object MapInput(string input, Validator validator, ConsoleDisplayer consoleDisplayer)
-        //{
-        //    switch (input)
-        //    {
-        //        case "1":
-        //            if (validator.ValidateMissleInput(input))
-        //            {
-        //                var rocketType = (RocketType)Enum.Parse(typeof(RocketType), input, true);
-        //                return MapTypeToRocket(rocketType);
-        //            }
-        //            return null;
-        //        case "2":
-        //            consoleDisplayer.PrintValueToConsole("Enter missle name and number of missles to launch. Use space between the two inputs");
-        //            string[] variables = Console.ReadLine().Split(' ');
-        //            if(validator.ValidateMissleInput(input))
-        //            {
-        //                return (variables[0], variables[1]);
-        //            }
-        //            return null;
-        //        case "3":
-        //            break;
-        //        case "4":
-        //            break;
-        //        case "5":
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
-
         public IActions<Rocket> MapInput(string input, ConsoleDisplayer consoleDisplayer, ref MisslesLauncher misslesLauncher, ref string[] variables)
         {
             string userInput;
@@ -54,9 +24,18 @@ namespace ShayetetSix
                     consoleDisplayer.PrintValueToConsole("Enter missle name and number of missles to launch. Use space between the two inputs");
                     userInput = Console.ReadLine();
                     variables = userInput.Split(' ');
-                    var launchAction = new LaunchRocketAction(misslesLauncher, int.Parse(variables[1]), variables[0]);
-                    misslesLauncher = launchAction.MisslesLauncher;
-                    return launchAction;
+                    if(variables.Length == 2)
+                    {
+                        var launchAction = new LaunchRocketAction(misslesLauncher, int.Parse(variables[1]), variables[0]);
+                        misslesLauncher = launchAction.MisslesLauncher;
+                        return launchAction;
+                    }
+                    else
+                    {
+                        var launchAction = new LaunchRocketAction(misslesLauncher, 0, variables[0]);
+                        misslesLauncher = launchAction.MisslesLauncher;
+                        return launchAction;
+                    }
                 case "3":
                     consoleDisplayer.PrintValueToConsole("Printing inventory");
                     return new InventoryReportAction(misslesLauncher);
@@ -75,7 +54,7 @@ namespace ShayetetSix
             }
         }
 
-        public Rocket MapRequiresMissleFunctions(string input, params string[] variables)
+        public Rocket GetRocketObject(string input, params string[] variables)
         {
             switch (input)
             {

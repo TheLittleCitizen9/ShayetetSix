@@ -25,6 +25,11 @@ namespace ShayetetSix.Actions
                     MisslesLauncher.MissleLauncher.RemoveAt(numOfMissles);
                     MisslesLauncher.MisslesFailedLaunchStatus.Remove(index);
                     Console.WriteLine("Missle deleted (:");
+                    Console.WriteLine("----------------------------------");
+                }
+                else
+                {
+                    Console.WriteLine("Index is out of range");
                 }
                 
             }
